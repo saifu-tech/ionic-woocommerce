@@ -1,0 +1,64 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="card-background-page">
+    <ion-card>
+      <img src="./assets/banners.png">
+      <div class="card-title">Ionic Woocommerce
+       <div class="card-subtitle">Keep Shoping</div> 
+      </div>
+    </ion-card>
+    <ion-list>
+    <!--   <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        {{p.title}}
+      </button> -->
+<ion-item-divider color="danger">Categories</ion-item-divider>
+      <button menuClose ion-item *ngFor="let categorie of categories" text-wrap (click)="openCategoryPage(categorie)">
+        <ion-icon [name] = "categorie.icon" item-left large></ion-icon>
+        <h2>{{categorie.name}}</h2>
+      </button>
+
+<ion-item-divider color="danger">Account</ion-item-divider>
+      <ion-item   (click)="openpage()" menuClose *ngIf="!loggedIn">
+        <ion-icon name="md-clipboard" item-left large></ion-icon>
+        <h2>Sign Up</h2>
+        <p>For a new account</p>
+      </ion-item>
+
+
+      <ion-item    (click)="loginmenu()" menuClose *ngIf="!loggedIn">
+        <ion-icon name="log-in" item-left large></ion-icon>
+        <h2>Login</h2>
+        <p>using Email and Password</p>
+      </ion-item>
+
+      <ion-item *ngIf="loggedIn" menuClose>
+        <ion-icon name="contact" item-left large></ion-icon>
+       <h2>{{ (this.user.firstname == '' ? this.user.username : this.user.firstname) || "" }}</h2>
+        <p>Welcome</p>
+      </ion-item>
+
+      <ion-item *ngIf="loggedIn" (click)="cartpagedetails()" menuClose>
+        <ion-icon name="cart" item-left large></ion-icon>
+        <h2>Your Cart</h2>
+        <p>Check items in your cart</p>
+      </ion-item>
+
+      <ion-item *ngIf="loggedIn" (click)="logoutCart()" menuClose>
+        <ion-icon name="log-out" item-left large></ion-icon>
+        <h2>Logout</h2>
+        <p>of your Account</p>
+      </ion-item> 
+
+
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
